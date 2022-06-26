@@ -1,0 +1,16 @@
+.CenterContient {
+  align-items: center;
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+}
+
+.AddButton {
+  margin: 10px;
+  border-radius: 50%;
+  padding: 5px;
+  border: 0;
+  align-items: center;
+  display: flex;
+  background-color: red;
+}
