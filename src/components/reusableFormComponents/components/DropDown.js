@@ -15,13 +15,12 @@ function CheckBox(props) {
   let { name, options, label } = props;
   return (
     <Field name={name}>
-      {({ field, form,touched,meta }) => {
-        console.log('touched', touched)
+      {({ field, form, meta }) => {
         return (
           <FormControl
             variant="filled"
-            sx={{ m: 1, minWidth: 120 }}
-            error={!!getIn(form.errors, props.name)&&meta.touched}
+            sx={{ m: 1, minWidth: '20%' }}
+            error={!!getIn(form.errors, props.name) && meta.touched}
           >
             <InputLabel id="demo-simple-select-filled-label">
               {label}
@@ -42,7 +41,9 @@ function CheckBox(props) {
               })}
             </Select>
 
-            <FormHelperText>{meta.touched?getIn(form.errors, props.name):''}</FormHelperText>
+            <FormHelperText>
+              {meta.touched ? getIn(form.errors, props.name) : ""}
+            </FormHelperText>
           </FormControl>
         );
       }}

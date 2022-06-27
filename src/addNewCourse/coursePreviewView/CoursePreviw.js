@@ -6,7 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { useDispatch, useSelector } from "react-redux";
-import { changeStepNum, toLastStep } from "../../redux/stepper/stepperActions";
+import { toLastStep } from "../../redux/stepper/stepperActions";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
@@ -31,7 +31,7 @@ function CoursePreviw() {
     courcePrice,
   } = useSelector((state) => state.course);
   const theme = useTheme();
-  console.log("first", lessons);
+  console.log("instructorImg", instructorImg);
   return (
     <Box sx={{ width: " 60% ", mx: "auto" }}>
       <Card sx={{ display: "flex" }}>
@@ -55,7 +55,7 @@ function CoursePreviw() {
               variant="subtitle1"
               color="text.secondary"
               component="div"
-              sx={{ mb:2}}
+              sx={{ mb:2,textDecoration:'underline'}}
             >
               By {instructorName}
             </Typography>
@@ -76,7 +76,7 @@ function CoursePreviw() {
               sx={{ display: "flex" }}
             >
               <MonetizationOnIcon sx={{ mx: 2 }}/>
-              {courcePrice} $
+              {courcePrice} 
             </Typography>
           </CardContent>
         </Box>
@@ -95,6 +95,7 @@ function CoursePreviw() {
 
             return (
               <ListItem
+              sx={{boxShadow:'0px 0px 2px #888888'}}
                 key={name}
                 secondaryAction={
                   <IconButton>

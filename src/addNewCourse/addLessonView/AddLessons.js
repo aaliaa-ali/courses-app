@@ -14,7 +14,7 @@ import { Button } from "@mui/material";
 function AddLessons() {
   const dispatch = useDispatch();
   const lessons = useSelector((state) => state.lessons);
-  console.log("first", lessons);
+  
   let onSubmit = (values) => {
     dispatch(addLessons(values));
     dispatch(toNextStep());
@@ -44,10 +44,9 @@ function AddLessons() {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
-        // isInitialValid={false}
+        validateOnMount
       >
         {({ errors, values, isValid }) => {
-          console.log("errors", errors);
           return (
             <Form>
               <FieldArray name="lessons">
@@ -60,7 +59,7 @@ function AddLessons() {
                           sx={{ display: "flex", justifyContent: "center" }}
                           key={index}
                         >
-                          <div className={classes.CenterContient}>
+                          <div className={classes.CenterContient} style={{width:'30%'}}>
                             <FormController
                               control="input"
                               name={`lessons[${index}].name`}
@@ -68,15 +67,17 @@ function AddLessons() {
                             />
                           </div>
                           <FormController
+                          style={{width:'30%'}}
                             control="dropdown"
                             name={`lessons[${index}].level`}
                             label="Level"
                             options={difficultyOptions}
                           />
+
                           {values.lessons.length == 1 ? null : (
                             <a
                               className={classes.CenterContient}
-                              onClick={(e) => {
+                              onClick={() => {
                                 remove(index);
                               }}
                             >
@@ -85,14 +86,14 @@ function AddLessons() {
                           )}
                         </Box>
                       ))}
-                    <div className={classes.CenterContient}>
-                      <button
+                    <Box sx={{ display: "flex", justifyContent: "center" }}>
+                      <a
                         className={classes.AddButton}
                         onClick={() => push({ name: "", level: "" })}
                       >
                         <AddIcon />
-                      </button>
-                    </div>
+                      </a>
+                    </Box>
                   </React.Fragment>
                 )}
               </FieldArray>

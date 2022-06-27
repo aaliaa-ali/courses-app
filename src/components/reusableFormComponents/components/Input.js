@@ -1,4 +1,4 @@
-import { Field, getIn } from "formik";
+import { ErrorMessage, Field, getIn } from "formik";
 import React from "react";
 import TextField from "@mui/material/TextField";
 function Input(props) {
@@ -6,7 +6,6 @@ function Input(props) {
   return (
     <Field name={name}>
       {({ field, form ,meta }) => {
-        console.log('first', field)
         return (
             <TextField
             sx={{width:1,m:1}}

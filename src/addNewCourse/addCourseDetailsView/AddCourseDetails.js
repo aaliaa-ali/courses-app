@@ -6,7 +6,7 @@ import FormController from "../../components/reusableFormComponents/FormControll
 import { useDispatch, useSelector } from "react-redux";
 import { addCourseDetails } from "../../redux/courseDetails/courseActions";
 import { toLastStep } from "../../redux/stepper/stepperActions";
-import { Button, TextField } from "@mui/material";
+import { Avatar, Button, TextField } from "@mui/material";
 import { toNextStep } from "../../redux/stepper/stepperActions";
 
 function AddCourseDetails() {
@@ -22,7 +22,7 @@ function AddCourseDetails() {
   const SUPPORTED_FORMATS = ["image/jpeg", "image/png", "image/jpg"];
   const NUMBERS_REJX = /^(0*[1-9][0-9]*(\.[0-9]*)?|0*\.[0-9]*[1-9][0-9]*)$/;
 
-  const initialValues = courseDetails
+  const initialValues = courseDetails;
 
   const validationSchema = Yup.object({
     courseName: Yup.string().required("Course Name Is Required!"),
@@ -50,16 +50,9 @@ function AddCourseDetails() {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
-        // isInitialValid={false}
+        validateOnMount
       >
-        {({
-          errors,
-          values,
-          isValid,
-          handleChange,
-          handleBlur,
-          setFieldValue,
-        }) => {
+        {({ errors, values, isValid, handleBlur, setFieldValue }) => {
           return (
             <Form>
               <Box sx={{ width: "60%", mx: "auto" }}>
@@ -84,24 +77,41 @@ function AddCourseDetails() {
                   />
                 </Box>
                 <Box sx={{ display: "flex", justifyContent: "center", m: 2 }}>
-                  <FormController
-                    control="input"
-                    name="instructorName"
-                    label="Instructor Name"
-                  />
-                  <TextField
-                    name="instructorImg"
-                    sx={{ width: 1, m: 1 }}
-                    id="filled-error-helper-text"
-                    variant="filled"
-                    type="file"
-                    onBlur={handleBlur}
-                    onChange={(e) =>
-                      setFieldValue("instructorImg", e.target.files[0])
-                    }
-                    error={!!errors.instructorImg}
-                    helperText={errors.instructorImg}
-                  />
+                  <Box sx={{ width: "50%", mr: 2 }}>
+                    <FormController
+                      control="input"
+                      name="instructorName"
+                      label="Instructor Name"
+                    />
+                  </Box>
+                  <Box
+                    sx={{
+                      width: "50%",
+                      m: 1,
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    {values.instructorImg ? (
+                      <Avatar
+                      sx={{mr:1}}
+                        alt="istructor img"
+                        src={URL.createObjectURL(values.instructorImg)}
+                      />
+                    ) : null}
+                    <TextField
+                      name="instructorImg"
+                      id="filled-error-helper-text"
+                      variant="filled"
+                      type="file"
+                      onBlur={handleBlur}
+                      onChange={(e) =>
+                        setFieldValue("instructorImg", e.target.files[0])
+                      }
+                      error={!!errors.instructorImg}
+                      helperText={errors.instructorImg}
+                    />
+                  </Box>
                 </Box>
               </Box>
               <Box>
